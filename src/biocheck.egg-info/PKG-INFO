@@ -29,6 +29,7 @@ Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: biopython>=1.81
 Requires-Dist: click>=8.0
+Requires-Dist: customtkinter>=5.2
 Provides-Extra: dev
 Requires-Dist: pytest>=7.0; extra == "dev"
 Dynamic: license-file

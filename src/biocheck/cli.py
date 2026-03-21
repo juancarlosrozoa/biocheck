@@ -114,6 +114,15 @@ def batch_report(files, output, profile):
         click.echo(f"\nReport: {output}")
 
 
+# ── gui ────────────────────────────────────────────────────────────────────
+
+@cli.command("gui")
+def launch_gui():
+    """Launch the graphical interface."""
+    from biocheck.gui.app import main
+    main()
+
+
 # ── helpers ────────────────────────────────────────────────────────────────
 
 def _print_and_save(report, output, fmt):

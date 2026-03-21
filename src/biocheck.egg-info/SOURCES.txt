@@ -11,5 +11,9 @@ src/biocheck.egg-info/requires.txt
 src/biocheck.egg-info/top_level.txt
 src/biocheck/core/__init__.py
 src/biocheck/core/fasta.py
+src/biocheck/core/html_report.py
 src/biocheck/core/report.py
 src/biocheck/core/structure.py
+src/biocheck/core/tabular.py
+src/biocheck/gui/__init__.py
+src/biocheck/gui/app.py
