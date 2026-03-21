@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/biocheck/__init__.py
+src/biocheck/cli.py
+src/biocheck.egg-info/PKG-INFO
+src/biocheck.egg-info/SOURCES.txt
+src/biocheck.egg-info/dependency_links.txt
+src/biocheck.egg-info/entry_points.txt
+src/biocheck.egg-info/requires.txt
+src/biocheck.egg-info/top_level.txt
+src/biocheck/core/__init__.py
+src/biocheck/core/fasta.py
+src/biocheck/core/report.py
+src/biocheck/core/structure.py

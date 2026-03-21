@@ -1,0 +1,5 @@
+biopython>=1.81
+click>=8.0
+
+[dev]
+pytest>=7.0

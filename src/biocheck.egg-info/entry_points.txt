@@ -1,0 +1,2 @@
+[console_scripts]
+biocheck = biocheck.cli:cli
