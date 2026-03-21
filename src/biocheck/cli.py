@@ -6,6 +6,7 @@ from pathlib import Path
 from biocheck.core.fasta import FastaValidator
 from biocheck.core.structure import StructureValidator
 from biocheck.core.tabular import TabularValidator
+from biocheck.core.html_report import render_html
 
 
 @click.group()
@@ -68,6 +69,49 @@ def validate_table(file, profile, columns, min_rows, max_rows, output, fmt):
         max_rows=max_rows,
     )
     _print_and_save(report, output, fmt)
+
+
+# ── report ─────────────────────────────────────────────────────────────────
+
+@cli.command("report")
+@click.argument("files", nargs=-1, required=True,
+                type=click.Path(exists=True, dir_okay=False))
+@click.option("--output", "-o", default="biocheck_report.html",
+              help="Output HTML file (default: biocheck_report.html).")
+@click.option("--profile", "-p", default=None,
+              type=click.Choice(["gtex", "hpa", "string", "gdc"]),
+              help="TSV profile applied to all tabular files.")
+def batch_report(files, output, profile):
+    """Validate multiple files and generate a combined HTML report.
+
+    Auto-detects file type by extension:
+    .fasta / .fa / .faa / .ffn → FASTA validator
+    .pdb / .cif / .mmcif       → Structure validator
+    .tsv / .csv / .tab         → Tabular validator
+    """
+    _FASTA_EXT     = {".fasta", ".fa", ".faa", ".ffn", ".fna"}
+    _STRUCTURE_EXT = {".pdb", ".cif", ".mmcif"}
+    _TABULAR_EXT   = {".tsv", ".csv", ".tab"}
+
+    reports = []
+    for f in files:
+        path = Path(f)
+        ext  = path.suffix.lower()
+        if ext in _FASTA_EXT:
+            reports.append(FastaValidator().validate(path))
+        elif ext in _STRUCTURE_EXT:
+            reports.append(StructureValidator().validate(path))
+        elif ext in _TABULAR_EXT:
+            reports.append(TabularValidator().validate(path, profile=profile))
+        else:
+            click.echo(f"[SKIP] Unknown extension for {path.name} — skipping.")
+            continue
+        label, _ = ("FAIL", None) if not reports[-1].is_valid else ("PASS", None)
+        click.echo(f"  {'FAIL' if not reports[-1].is_valid else 'WARN' if reports[-1].warnings else 'PASS'}  {path.name}")
+
+    if reports:
+        render_html(reports, output)
+        click.echo(f"\nReport: {output}")
 
 
 # ── helpers ────────────────────────────────────────────────────────────────
