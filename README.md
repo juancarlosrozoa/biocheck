@@ -4,9 +4,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![Formats](https://img.shields.io/badge/Formats-FASTA%20|%20PDB%20|%20mmCIF%20|%20TSV%20|%20CSV-green)](#supported-formats)
 
-**BioCheck** is a standalone validator for biological files. It inspects FASTA sequences, protein and nucleotide structures (PDB / mmCIF), and tabular data (TSV / CSV from GTEx, STRING, HPA, GDC) for format errors, missing data, and biological inconsistencies — producing detailed reports in plain text, JSON, TSV, or interactive HTML.
-
-Drop a file into the GUI, run a single CLI command, or import the library into your pipeline. All three interfaces share the same validation engine.
+Validate biological files before using them. Supports FASTA, PDB, mmCIF, TSV, and CSV. Outputs plain text, JSON, or interactive HTML reports.
 
 ---
 
